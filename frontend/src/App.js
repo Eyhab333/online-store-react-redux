@@ -1,5 +1,5 @@
 import Home from "pages/home/Home";
-import Create from "pages/create/Create";
+import Cart from "pages/cart/Cart";
 import Root from "./pages/Root";
 import Notfound from "pages/Notfound";
 import {
@@ -14,7 +14,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<Home />} />
-      <Route path="create" element={<Create />} />
+      <Route path="cart" element={<Cart />} />
       <Route path="*" element={<Notfound />} />
     </Route>
   )

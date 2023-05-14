@@ -12,7 +12,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import CreateIcon from "@mui/icons-material/Create";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -65,10 +65,29 @@ function ResponsiveDrawer(props) {
     },
   }));
 
+  const StyledBadge2 = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      right: -3,
+      top: 13,
+      border: `1px solid ${theme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  }));
+
   const MyList = () => {
     const myList = [
       { title: "Home", link: "/", icon: <HomeIcon /> },
-      { title: "Create", link: "/create", icon: <CreateIcon /> },
+      {
+        title: "Cart",
+        link: "/cart",
+        icon: (
+          <IconButton sx={{ padding: "0" }} aria-label="cart">
+            <StyledBadge2 badgeContent={4} color="primary">
+              <ShoppingCartIcon />
+            </StyledBadge2>
+          </IconButton>
+        ),
+      },
     ];
 
     return (
