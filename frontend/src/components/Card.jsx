@@ -1,23 +1,14 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import {  Button, CardActionArea,  } from "@mui/material";
-// import AddIcon from "@mui/icons-material/Add";
-// import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
-// import IconButton from "@mui/material/IconButton";
+import { Button, CardActionArea } from "@mui/material";
+
 import Stack from "@mui/material/Stack";
+import { useGetproductsByNameQuery } from "services/productsApi";
 
 export default function MultiActionAreaCard() {
-  // const StyledBadge = styled(Badge)(({ theme }) => ({
-  //   "& .MuiBadge-badge": {
-  //     right: 0,
-  //     top: 0,
-  //     border: `1px solid ${theme.palette.background.paper}`,
-  //     padding: "0 ",
-  //   },
-  // }));
+  const { data } = useGetproductsByNameQuery();
   return (
     <Stack
       direction={{ xs: "column", sm: "row" }}
@@ -25,7 +16,7 @@ export default function MultiActionAreaCard() {
     >
       <Card sx={{ maxWidth: 250 }}>
         <CardActionArea>
-          <CardMedia component="img" height="140" image="" alt="watch" />
+          <CardMedia component="img" height="140" image={data.imageLink} alt="watch" />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
@@ -43,19 +34,14 @@ export default function MultiActionAreaCard() {
             padding: "10px",
           }}
         >
-          {/* <Stack direction={{ xs: "row", sm: "row" }}>
-            <Button size="small" color="primary">
-              <AddIcon />
-            </Button>
-            <IconButton size="small" color="primary">
-              <StyledBadge badgeContent={4} color="primary"></StyledBadge>
-            </IconButton>
-            <Button size="small" color="primary">
-              <HorizontalRuleIcon />
-            </Button>
-          </Stack> */}
-          <Button variant="contained" sx={{ textTransform: "capitalize", lineHeight: '1' }}>add to cart</Button>
-          <Typography sx={{ pr: "20px" }}>$100</Typography>
+          <Button
+            variant="contained"
+            sx={{ textTransform: "capitalize", lineHeight: "1" }}
+          >
+            add to cart
+          </Button>
+          <Typography sx={{ pr: "20px" }}>{data.price}</Typography>
+
         </Stack>
       </Card>
     </Stack>
