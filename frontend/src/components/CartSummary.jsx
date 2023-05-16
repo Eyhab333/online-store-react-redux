@@ -4,8 +4,8 @@ import { Box, Button, Card, Divider, Stack, Typography } from "@mui/material";
 
 const CartSummary = () => {
   return (
-    <Box sx={{ mt: '33px', }}>
-      <Card sx={{ maxWidth: '200px', margin: '0 auto'}}>
+    <Box sx={{ mt: '33px'  }}>
+      <Card sx={{ minWidth: '242px', margin: '0 auto'}}>
         <Typography variant="h6" sx={{textAlign: 'center', padding: '12px'}}>
           Cart summary
         </Typography>

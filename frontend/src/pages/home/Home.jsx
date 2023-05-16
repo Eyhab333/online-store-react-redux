@@ -1,9 +1,9 @@
-import { Grid } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 import "./Home.css";
 import Card from "components/Card";
 import { useGetproductsByNameQuery } from "services/productsApi";
 
-const productsApi = [{}];
+
 
 const Home = () => {
   const { data, error, isLoading } = useGetproductsByNameQuery();
@@ -14,19 +14,20 @@ const Home = () => {
       container
       rowSpacing={4}
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+      
     >
       {error ? (
         <>Oh no, there was an error</>
       ) : isLoading ? (
-        <>Loading...</>
+        <>
+        <CircularProgress/>
+        </>
       ) : data ? (
         <>
-          {productsApi.map((item, data) => {
+          {data.map((item) => {
             return (
               <Grid item>
-                <Card 
-                // تقريبا محتاج انقل الكارد كله هنا
-                data={data} />
+                <Card item={item} key={item.id} />
               </Grid>
             );
           })}

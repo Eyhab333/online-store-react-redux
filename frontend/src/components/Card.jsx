@@ -3,24 +3,24 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea } from "@mui/material";
-
 import Stack from "@mui/material/Stack";
-import { useGetproductsByNameQuery } from "services/productsApi";
+import { useDispatch } from "react-redux";
+import { addToCart } from "cart/cartSlice";
 
-export default function MultiActionAreaCard() {
-  const { data } = useGetproductsByNameQuery();
+export default function MultiActionAreaCard({ item }) {
+  const dispatch = useDispatch()
   return (
     <Stack
       direction={{ xs: "column", sm: "row" }}
       spacing={{ xs: 5, sm: 2, md: 4 }}
+      key={item.id}
     >
-      <Card sx={{ maxWidth: 250 }}>
+      <Card key={item.id} sx={{ maxWidth: 250 }}>
         <CardActionArea>
-          <CardMedia component="img" height="140" image={data.imageLink} alt="watch" />
+          <CardMedia component="img" height="240" image={item.imageLink} alt="watch" />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-              aperiam quas dolorem quaerat deserunt alias
+              {item.description}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -37,10 +37,13 @@ export default function MultiActionAreaCard() {
           <Button
             variant="contained"
             sx={{ textTransform: "capitalize", lineHeight: "1" }}
+            onClick={() => {
+              dispatch(addToCart(item))
+            }}
           >
             add to cart
           </Button>
-          <Typography sx={{ pr: "20px" }}>{data.price}</Typography>
+          <Typography sx={{ pr: "20px"  }}>${item.price}</Typography>
 
         </Stack>
       </Card>
