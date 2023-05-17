@@ -24,10 +24,10 @@ const Home = () => {
         </>
       ) : data ? (
         <>
-          {data.map((item) => {
+          {data.map((item, index) => {
             return (
-              <Grid item>
-                <Card item={item} key={item.id} />
+              <Grid item key={item.id}>
+                <Card item={item} index={index} key={item.id} />
               </Grid>
             );
           })}

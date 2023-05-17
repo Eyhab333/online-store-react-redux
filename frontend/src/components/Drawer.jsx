@@ -22,6 +22,7 @@ import Avatar from "@mui/material/Avatar";
 import { useLocation, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { green } from "@mui/material/colors";
+import { useSelector } from "react-redux";
 
 const color = green[500];
 
@@ -75,6 +76,8 @@ function ResponsiveDrawer(props) {
   }));
 
   const MyList = () => {
+    // @ts-ignore
+    const { selectedProducts } = useSelector((state) => state.cartttt);
     const myList = [
       { title: "Home", link: "/", icon: <HomeIcon /> },
       {
@@ -82,7 +85,10 @@ function ResponsiveDrawer(props) {
         link: "/cart",
         icon: (
           <IconButton sx={{ padding: "0" }} aria-label="cart">
-            <StyledBadge2 badgeContent={4} color="primary">
+            <StyledBadge2
+              badgeContent={selectedProducts.length}
+              color="primary"
+            >
               <ShoppingCartIcon />
             </StyledBadge2>
           </IconButton>

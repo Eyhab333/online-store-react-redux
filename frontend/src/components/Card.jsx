@@ -2,13 +2,42 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea } from "@mui/material";
+import {
+  Button,
+  CardActionArea,
+  IconButton,
+  styled,
+  Badge,
+} from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
-import { addToCart } from "cart/cartSlice";
+import { addToCart, decreaseQuantity, increaseQuantity } from "cart/cartSlice";
+import { Remove } from "@mui/icons-material";
+import AddIcon from "@mui/icons-material/Add";
+import { useSelector } from "react-redux";
 
-export default function MultiActionAreaCard({ item }) {
-  const dispatch = useDispatch()
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: 0,
+    top: 0,
+    border: `1px solid ${theme.palette.background.paper}`,
+    padding: "0 ",
+  },
+}));
+
+export default function MultiActionAreaCard({ item, index }) {
+  const dispatch = useDispatch();
+
+  const { selectedProducts, selectedProductsID } = useSelector(
+    // @ts-ignore
+    (state) => state.cartttt
+  );
+  const productQuantity = (itemAPI) => {
+    const myProduct = selectedProducts.find((itemUser) => {
+      return itemUser.id === itemAPI.id;
+    });
+    return myProduct.quantity;
+  };
   return (
     <Stack
       direction={{ xs: "column", sm: "row" }}
@@ -17,7 +46,12 @@ export default function MultiActionAreaCard({ item }) {
     >
       <Card key={item.id} sx={{ maxWidth: 250 }}>
         <CardActionArea>
-          <CardMedia component="img" height="240" image={item.imageLink} alt="watch" />
+          <CardMedia
+            component="img"
+            height="240"
+            image={item.imageLink}
+            alt="watch"
+          />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
               {item.description}
@@ -34,17 +68,46 @@ export default function MultiActionAreaCard({ item }) {
             padding: "10px",
           }}
         >
-          <Button
-            variant="contained"
-            sx={{ textTransform: "capitalize", lineHeight: "1" }}
-            onClick={() => {
-              dispatch(addToCart(item))
-            }}
-          >
-            add to cart
-          </Button>
-          <Typography sx={{ pr: "20px"  }}>${item.price}</Typography>
+          {selectedProductsID.includes(item.id) ? (
+            <Stack direction={{ xs: "row", sm: "row" }}>
+              <Button
+                onClick={() => {
+                  dispatch(increaseQuantity(item));
+                }}
+                size="small"
+                color="primary"
+              >
+                <AddIcon />
+              </Button>
+              <IconButton size="small" color="primary">
+                <StyledBadge
+                  badgeContent={productQuantity(item)}
+                  color="primary"
+                ></StyledBadge>
+              </IconButton>
+              <Button
+                onClick={() => {
+                  dispatch(decreaseQuantity(item));
+                }}
+                size="small"
+                color="primary"
+              >
+                <Remove />
+              </Button>
+            </Stack>
+          ) : (
+            <Button
+              variant="contained"
+              sx={{ textTransform: "capitalize", lineHeight: "1" }}
+              onClick={() => {
+                dispatch(addToCart(item));
+              }}
+            >
+              add to cart
+            </Button>
+          )}
 
+          <Typography sx={{ pr: "20px" }}>${item.price}</Typography>
         </Stack>
       </Card>
     </Stack>

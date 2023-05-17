@@ -1,17 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  selectedProducts: [
-    {
-      id: 1,
-      productName: "T-shirt",
-      description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elite. Sequi, perferendis beatae asperiores.",
-      price: 199,
-      imageLink:
-        "https://res.cloudinary.com/dbtklbenn/image/upload/v1683991215/online-store/Photo_by_Yash_Parashar_on_Unsplash3_g29dsu.jpg",
-    },
-  ],
+  selectedProducts: [],
+  selectedProductsID: [],
 };
 
 export const cartSlice = createSlice({
@@ -19,21 +10,46 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      alert('doneeeeeeeee')
+      const productAndQuantity = { ...action.payload, quantity: 1 };
+      state.selectedProducts.push(productAndQuantity);
+      state.selectedProductsID.push(action.payload.id);
     },
     increaseQuantity: (state, action) => {
-      alert('doneeeeeeeee')
+      const increasedProduct = state.selectedProducts.find((item) => {
+        return item.id === action.payload.id;
+      });
+      increasedProduct.quantity += 1;
     },
     decreaseQuantity: (state, action) => {
-      alert('doneeeeeeeee')
+      const decreasedProduct = state.selectedProducts.find((item) => {
+        return item.id === action.payload.id;
+      });
+      decreasedProduct.quantity -= 1;
+      if (decreasedProduct.quantity === 0) {
+        const newarr =  state.selectedProducts.filter((item) => {
+          return item.id !== action.payload.id;
+        })
+        state.selectedProducts = newarr;
+
+        const newarrID =  state.selectedProductsID.filter((item) => {
+          return item.id !== action.payload.id;
+        })
+        state.selectedProductsID = newarrID;
+      }
     },
     deleteProduct: (state, action) => {
-      alert('doneeeeeeeee')
-    },
+      const newarr2 =  state.selectedProducts.filter((item) => {
+        return item !== action.payload.id;
+      })
+      state.selectedProducts = newarr2;
+
+      
+    }
   },
 });
 
 // export const vvvvvvvv = (state) => state?.cart?.id;
 
-export const {addToCart, increaseQuantity, decreaseQuantity, deleteProduct} = cartSlice.actions;
+export const { addToCart, increaseQuantity, decreaseQuantity, deleteProduct } =
+  cartSlice.actions;
 export default cartSlice.reducer;

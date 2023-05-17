@@ -8,6 +8,7 @@ import { Badge, CardMedia, Stack, styled, Typography } from "@mui/material";
 import { increaseQuantity, decreaseQuantity, deleteProduct } from "cart/cartSlice";
 import { useDispatch } from "react-redux";
 import { Remove } from "@mui/icons-material";
+// import { useSelector } from "react-redux";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -20,6 +21,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 export default function BasicCard({ item }) {
   const dispatch = useDispatch()
+  // @ts-ignore
+  // const { selectedProducts } = useSelector((state) => state.cartttt);
   return (
     <Card sx={{ minWidth: 275, display: "flex", alignItems: "center", mt: '23px' }}>
       <CardActions>
@@ -41,7 +44,7 @@ export default function BasicCard({ item }) {
           <AddIcon />
         </Button>
         <IconButton size="small" color="primary">
-          <StyledBadge badgeContent={4} color="primary"></StyledBadge>
+          <StyledBadge badgeContent={item.quantity} color="primary"></StyledBadge>
         </IconButton>
         <Button
         onClick={() => {
