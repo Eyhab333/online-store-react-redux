@@ -12,8 +12,7 @@ import {
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
 import { addToCart, decreaseQuantity, increaseQuantity } from "cart/cartSlice";
-import { Remove } from "@mui/icons-material";
-import AddIcon from "@mui/icons-material/Add";
+import { Add, Remove } from "@mui/icons-material";
 import { useSelector } from "react-redux";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -25,6 +24,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
+
+
 export default function MultiActionAreaCard({ item, index }) {
   const dispatch = useDispatch();
 
@@ -32,12 +33,14 @@ export default function MultiActionAreaCard({ item, index }) {
     // @ts-ignore
     (state) => state.cartttt
   );
-  const productQuantity = (itemAPI) => {
-    const myProduct = selectedProducts.find((itemUser) => {
+
+  const productQuantity = (/** @type {{ id: any; }} */ itemAPI) => {
+    let myProduct = selectedProducts.find((/** @type {{ id: any; }} */ itemUser) => {
       return itemUser.id === itemAPI.id;
     });
-    return myProduct.quantity;
+      return myProduct.quantity
   };
+
   return (
     <Stack
       direction={{ xs: "column", sm: "row" }}
@@ -77,7 +80,7 @@ export default function MultiActionAreaCard({ item, index }) {
                 size="small"
                 color="primary"
               >
-                <AddIcon />
+                <Add />
               </Button>
               <IconButton size="small" color="primary">
                 <StyledBadge
