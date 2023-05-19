@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { addToCart, decreaseQuantity, increaseQuantity } from "cart/cartSlice";
 import { Add, Remove } from "@mui/icons-material";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -24,11 +25,9 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-
-
-export default function MultiActionAreaCard({ item, index }) {
+export default function MultiActionAreaCard({ item }) {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const { selectedProducts, selectedProductsID } = useSelector(
     // @ts-ignore
     (state) => state.cartttt
@@ -48,11 +47,15 @@ export default function MultiActionAreaCard({ item, index }) {
       key={item.id}
     >
       <Card key={item.id} sx={{ maxWidth: 250 }}>
-        <CardActionArea>
+        <CardActionArea 
+        onClick={() => {
+          navigate(`product-details/${item.id}`)
+        }}
+        >
           <CardMedia
             component="img"
             height="240"
-            image={item.imageLink}
+            image={item.imageLink[0]}
             alt="watch"
           />
           <CardContent>

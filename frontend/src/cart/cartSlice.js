@@ -18,17 +18,15 @@ export const cartSlice = createSlice({
       state.selectedProducts.push(productAndQuantity);
       state.selectedProductsID.push(action.payload.id);
 
-      localStorage.setItem("selectedProducts", JSON.stringify(state.selectedProducts));
-      localStorage.setItem("selectedProductsID", JSON.stringify(state.selectedProductsID));
+      localStorage.setItem(
+        "selectedProducts",
+        JSON.stringify(state.selectedProducts)
+      );
+      localStorage.setItem(
+        "selectedProductsID",
+        JSON.stringify(state.selectedProductsID)
+      );
     },
-
-
-
-
-
-
-
-
 
     increaseQuantity: (state, action) => {
       const increasedProduct = state.selectedProducts.find((item) => {
@@ -36,13 +34,11 @@ export const cartSlice = createSlice({
       });
       increasedProduct.quantity += 1;
 
-      localStorage.setItem("selectedProducts", JSON.stringify(state.selectedProducts));
+      localStorage.setItem(
+        "selectedProducts",
+        JSON.stringify(state.selectedProducts)
+      );
     },
-
-
-
-
-
 
     decreaseQuantity: (state, action) => {
       const decreasedProduct = state.selectedProducts.find((item) => {
@@ -61,19 +57,17 @@ export const cartSlice = createSlice({
         state.selectedProducts = newarr;
         state.selectedProductsID = newarrID;
 
-        localStorage.setItem("selectedProducts", JSON.stringify(state.selectedProducts));
-      localStorage.setItem("selectedProductsID", JSON.stringify(state.selectedProductsID));
+        localStorage.setItem(
+          "selectedProductsID",
+          JSON.stringify(state.selectedProductsID)
+        );
       }
+
+      localStorage.setItem(
+        "selectedProducts",
+        JSON.stringify(state.selectedProducts)
+      );
     },
-
-
-
-
-
-
-
-
-
 
     deleteProduct: (state, action) => {
       const newarr2 = state.selectedProducts.filter((item) => {
@@ -85,8 +79,14 @@ export const cartSlice = createSlice({
       state.selectedProducts = newarr2;
       state.selectedProductsID = newarr22;
 
-      localStorage.setItem("selectedProducts", JSON.stringify(state.selectedProducts));
-      localStorage.setItem("selectedProductsID", JSON.stringify(state.selectedProductsID));
+      localStorage.setItem(
+        "selectedProducts",
+        JSON.stringify(state.selectedProducts)
+      );
+      localStorage.setItem(
+        "selectedProductsID",
+        JSON.stringify(state.selectedProductsID)
+      );
     },
   },
 });

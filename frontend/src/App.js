@@ -8,6 +8,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import ProductDetails from "pages/ProductDetails/ProductDetails";
 
 
 const router = createBrowserRouter(
@@ -15,6 +16,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Root />}>
       <Route index element={<Home />} />
       <Route path="cart" element={<Cart />} />
+      <Route path="product-details/:id" element={<ProductDetails />} />
       <Route path="*" element={<Notfound />} />
     </Route>
   )

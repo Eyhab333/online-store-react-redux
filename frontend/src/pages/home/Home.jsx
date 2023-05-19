@@ -3,31 +3,28 @@ import "./Home.css";
 import Card from "components/Card";
 import { useGetproductsByNameQuery } from "services/productsApi";
 
-
-
 const Home = () => {
   const { data, error, isLoading } = useGetproductsByNameQuery();
-  
+
   return (
     <Grid
       sx={{ padding: "50px", paddingTop: "0" }}
       container
       rowSpacing={4}
       columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-      
     >
       {error ? (
         <>Oh no, there was an error</>
       ) : isLoading ? (
         <>
-        <CircularProgress/>
+          <CircularProgress />
         </>
       ) : data ? (
         <>
-          {data.map((item, index) => {
+          {data.map((item) => {
             return (
               <Grid item key={item.id}>
-                <Card item={item} index={index} key={item.id} />
+                <Card item={item} key={item.id} />
               </Grid>
             );
           })}
