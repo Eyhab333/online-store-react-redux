@@ -6,7 +6,7 @@ const products = [
       "Lorem ipsum, dolor sit amet consectetur adipisicing elite. Sequi, perferendis beatae asperiores.",
     price: 199,
     imageLink: [
-      "https://res.cloudinary.com/dbtklbenn/image/upload/v1683991215/online-store/Photo_by_Yash_Parashar_on_Unsplash3_g29dsu.jpg",
+      "https://res.cloudinary.com/dbtklbenn/image/upload/v1684223900/online-store/rick-muigo-SX9IouL_qOg-unsplash_lepyl8.jpg",
       "https://res.cloudinary.com/dbtklbenn/image/upload/v1683990474/samples/ecommerce/leather-bag-gray.jpg",
       "https://res.cloudinary.com/dbtklbenn/image/upload/v1683990475/samples/ecommerce/accessories-bag.jpg",
       "https://res.cloudinary.com/dbtklbenn/image/upload/v1683990466/samples/ecommerce/analog-classic.jpg",
